@@ -1,1 +1,39 @@
 @import "../../scss/variables.scss";
+@import "../../scss/utility.scss";
+
+.Navbar {
+  padding: 1em;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $primaryColor;
+
+  > h1 {
+    font-size: 30px;
+    font-weight: 900;
+  }
+
+  &__account {
+    align-items: center;
+    gap: 1em;
+
+    > img {
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+    }
+
+    > button {
+      cursor: pointer;
+      align-items: center;
+      font-size: 17px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 600;
+      background: $secondaryColor;
+      color: $whiteColor;
+      gap: 0.4rem;
+      padding: 0.7em;
+      outline: 0;
+      border: 1px solid white;
+    }
+  }
+}

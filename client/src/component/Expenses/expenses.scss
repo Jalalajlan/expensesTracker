@@ -1,0 +1,14 @@
+@import "../../scss/variables.scss";
+@import "../../scss/utility.scss";
+
+////////////////////////////////////////////
+////////////////////////////////////////////@
+
+.Expenses {
+  display: flex;
+  align-items: flex-start;
+
+  &__overview {
+    flex: 2;
+  }
+}

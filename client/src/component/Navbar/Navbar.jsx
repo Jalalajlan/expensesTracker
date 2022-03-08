@@ -1,20 +1,18 @@
 import React from "react";
-import accountIcon from "../../images/User.svg";
-import logoutIcon from "../../images/log_out.svg";
+import "./navbar.scss";
+
+import LogoutIcon from "../../images/log_out.svg";
 import UserAvatar from "../../images/Avatar2.png";
 
 const Navbar = () => {
   return (
-    <div className="Navabar">
-      <h1>Expense Tracker</h1>
-      <div>
+    <div className="flex Navbar">
+      <h1>Expenses Tracker</h1>
+      <div className="flex Navbar__account">
         <img src={UserAvatar} alt="User Avatar" />
-        <div>
-          <img src={accountIcon} alt="Account Icon" />
-          <span>Jalalajlan@gmail.com</span>
-          <img src={logoutIcon} alt="Logout Icon" />
-          <span>Log out</span>
-        </div>
+        <button className="flex" onClick={() => {}}>
+          Sign out <img src={LogoutIcon} alt="Log out Icon" srcset="" />
+        </button>
       </div>
     </div>
   );
