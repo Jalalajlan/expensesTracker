@@ -9,26 +9,25 @@ const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    if (!name || !email || !password)
+    if (!name && !email && !password)
       res.status(400).json({ message: "all fields are required" });
 
     const userFound = await User.findOne({ email });
-    if (userFound)
+
+    if (userFound) {
       res.status(400).json({ message: "email has been used before" });
+    } else {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+      const user = await User.create({
+        name,
+        email,
+        password: hashedPassword,
+      });
 
-    const user = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-    });
-
-    if (user) res.status(200).json(user);
-    res.status(400).json({
-      message: "we face a problem to register you",
-    });
+      if (user) res.status(200).json(user);
+    }
   } catch (error) {
     res.status(200).json({ message: error.message });
   }
