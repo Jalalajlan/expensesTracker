@@ -3,9 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import userAction from "./../../actions/user";
+import Modal from "./../../component/Modal/modal";
 
 const Register = () => {
   const dispatch = useDispatch();
+  const [isopen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,20 +17,31 @@ const Register = () => {
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.user);
-  const { error } = user;
-
   console.log(user);
 
   useEffect(() => {
-    if (error) {
-      alert("registeration failed");
+    if (user.error === "email has been used before") {
+      alert("Error: email has been used before");
+      resetForm();
     }
 
-    if (Object.keys(user).length !== 0) {
-      navigate("/login");
-      dispatch(userAction.resetUser());
+    if (user.error === "all fields are required") {
+      alert("Error: all fields are required");
+      resetForm();
     }
-  }, [user, navigate, error, dispatch]);
+
+    if (Object.keys(user.user).length !== 0) {
+      if (user.isSuccess) {
+        navigate("/dashboard");
+      } else {
+        setIsOpen(true);
+        dispatch(userAction.resetUser());
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      }
+    }
+  }, [user, navigate, dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,6 +52,18 @@ const Register = () => {
     } else {
       dispatch(userAction.registerUser(formData));
     }
+  };
+
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      email: "",
+      password: "",
+    });
+  };
+
+  const closeModal = () => {
+    setIsOpen(!isopen);
   };
 
   const onChange = (e) => {
@@ -80,7 +105,13 @@ const Register = () => {
           </Link>
         </form>
       </div>
-      <div className="register__about"></div>
+      <div className="register__about"></div>{" "}
+      {isopen && (
+        <Modal
+          message={"Account has been registered successfully ..."}
+          closeModal={closeModal}
+        />
+      )}
     </div>
   );
 };

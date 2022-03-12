@@ -25,17 +25,17 @@ const registerUser = async (req, res) => {
         email,
         password: hashedPassword,
       });
-
       if (user) res.status(200).json(user);
     }
   } catch (error) {
-    res.status(200).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 
 // @desc   Login new user
 // @route  POST /api/users/login
 // @access Public
+//
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
