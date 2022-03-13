@@ -1,28 +1,33 @@
 import mongoose from "mongoose";
 
-const expenseSchema = mongoose.Schema({
-  amount: {
-    type: Number,
-    required: true,
+const expensesSchema = mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
+    planName: {
+      type: String,
+      required: true,
+    },
+    expenses: [
+      {
+        amount: Number,
+        category: String,
+        note: String,
+        createdAt: {
+          type: Date,
+          default: Date().now,
+        },
+      },
+    ],
   },
-  Date: {
-    type: String,
-    required: true,
-  },
-  category: {
-    type: String,
-    required: true,
-  },
-  note: {
-    type: String,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
-const Expense = mongoose.model("Expense", expenseSchema);
+const Expenses = mongoose.model("Expenses", expensesSchema);
 
-export default Expense;
+export default Expenses;

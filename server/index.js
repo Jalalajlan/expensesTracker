@@ -3,7 +3,7 @@ import "dotenv/config";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
-import ExpensesRoutes from "./routes/expenses.js";
+import ExpensesRoutes from "./routes/expensesRoute.js";
 import userRoutes from "./routes/userRoute.js";
 
 const app = express();
