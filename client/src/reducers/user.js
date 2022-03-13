@@ -5,7 +5,6 @@ import actionNames from "./../constants/index";
 /*******************************/
 
 // Get user from localStorage
-const storedUser = JSON.parse(localStorage.getItem("user"));
 const initalState = { user: {}, error: false };
 
 const userReducer = (user, action) => {
@@ -17,8 +16,7 @@ const userReducer = (user, action) => {
     LOGIN_USER_FAIL,
   } = actionNames;
 
-  storedUser ? (user = storedUser) : (user = initalState);
-
+  user = initalState;
   switch (action.type) {
     // User Registeration Reducers
     case CREATE_USER:

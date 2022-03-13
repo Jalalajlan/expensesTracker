@@ -24,13 +24,11 @@ const Login = () => {
     if (user.error === "invalid credentials") {
       alert("please enter valid email and password");
       resetForm();
-    } else {
-      if (Object.keys(user.user).length !== 0) {
-        setIsOpen(true);
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 2000);
-      }
+    }
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (storedUser) {
+      navigate("/dashboard");
     }
   }, [user, navigate]);
 
@@ -40,7 +38,13 @@ const Login = () => {
     if (formData.password !== formData.password2) {
       alert("password does not match with each other");
     } else {
-      dispatch(userAction.loginUser(formData));
+      if (user.error === "invalid credentials") {
+        alert("please enter valid email and password");
+        resetForm();
+      } else {
+        dispatch(userAction.loginUser(formData));
+        setIsOpen(true);
+      }
     }
   };
 

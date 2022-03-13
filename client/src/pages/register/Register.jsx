@@ -30,16 +30,10 @@ const Register = () => {
       resetForm();
     }
 
-    if (Object.keys(user.user).length !== 0) {
-      if (user.isSuccess) {
-        navigate("/dashboard");
-      } else {
-        setIsOpen(true);
-        dispatch(userAction.resetUser());
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
-      }
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (storedUser) {
+      navigate("/dashboard");
     }
   }, [user, navigate, dispatch]);
 
@@ -51,6 +45,9 @@ const Register = () => {
       alert("all fields are required");
     } else {
       dispatch(userAction.registerUser(formData));
+      setIsOpen(true);
+      dispatch(userAction.resetUser());
+      navigate("/login");
     }
   };
 
