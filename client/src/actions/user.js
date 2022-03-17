@@ -1,11 +1,16 @@
 import userService from "../api/userService";
-import actionNames from "../constants";
+import {
+  CREATE_USER,
+  CREATE_USER_FAIL,
+  LOGIN_USER,
+  LOGIN_USER_FAIL,
+  LOG_OUT
+} from "./types";
 
 const registerUser = (user) => async (dispatch) => {
-  const { CREATE_USER, CREATE_USER_FAIL } = actionNames;
-
   try {
     const { data } = await userService.createUser(user);
+    localStorage.setItem("token", JSON.stringify(data.token) );
     dispatch({ type: CREATE_USER, payload: data });
   } catch (error) {
     dispatch({
@@ -16,15 +21,10 @@ const registerUser = (user) => async (dispatch) => {
 };
 
 const loginUser = (user) => async (dispatch) => {
-  const { LOGIN_USER, LOGIN_USER_FAIL } = actionNames;
-
   try {
     const { data } = await userService.loginUser(user);
+    localStorage.setItem("token", JSON.stringify(data.token));
     dispatch({ type: LOGIN_USER, payload: data });
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ user: data, error: false, isSuccess: true })
-    );
   } catch (error) {
     dispatch({
       type: LOGIN_USER_FAIL,
@@ -33,15 +33,16 @@ const loginUser = (user) => async (dispatch) => {
   }
 };
 
-const resetUser = () => async (dispatch) => {
-  const { USER_RESET } = actionNames;
-  dispatch({ type: USER_RESET, payload: { user: {}, error: false } });
+
+const logout = () => async (dispatch) => {
+    localStorage.removeItem("token");
+    dispatch({ type: LOG_OUT });
 };
 
 const userAction = {
   loginUser,
   registerUser,
-  resetUser,
+  logout
 };
 
 export default userAction;

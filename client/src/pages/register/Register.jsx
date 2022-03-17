@@ -17,7 +17,6 @@ const Register = () => {
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.user);
-  console.log(user);
 
   useEffect(() => {
     if (user.error === "email has been used before") {
@@ -30,12 +29,17 @@ const Register = () => {
       resetForm();
     }
 
-    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const userToken = localStorage.getItem("token");
 
-    if (storedUser) {
-      navigate("/dashboard");
+    if (user.isAuthenticated === true || userToken) {
+      setIsOpen(true);
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     }
-  }, [user, navigate, dispatch]);
+  }, 
+  
+  [user, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,9 +49,6 @@ const Register = () => {
       alert("all fields are required");
     } else {
       dispatch(userAction.registerUser(formData));
-      setIsOpen(true);
-      dispatch(userAction.resetUser());
-      navigate("/login");
     }
   };
 

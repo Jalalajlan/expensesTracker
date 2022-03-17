@@ -1,18 +1,23 @@
 import "./dashboard.scss";
 
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 import Navbar from "./../../component/Navbar/Navbar";
+import { useSelector, useDispatch } from "react-redux";
+import expenseActions from "./../../actions/expenses";
+import { Navigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
+  /********************************/
+  const dispatch = useDispatch();
+
+  const expenses = useSelector((state) => state.expenses);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (!storedUser) {
-      navigate("/login");
-    }
-  }, [navigate]);
+    dispatch(expenseActions.getUserPlans());
+  }, []);
+
   return (
     <>
       <Navbar />

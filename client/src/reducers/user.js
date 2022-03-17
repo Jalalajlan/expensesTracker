@@ -1,38 +1,48 @@
 /*******************************/
-/*******************************/
-/*******************************/
-import actionNames from "./../constants/index";
-/*******************************/
+import {
+  CREATE_USER,
+  CREATE_USER_FAIL,
+  LOGIN_USER,
+  LOGIN_USER_FAIL,
+  LOG_OUT,
+} from "./../actions/types";
 
-// Get user from localStorage
-const initalState = { user: {}, error: false };
+const initalState = {
+  user: null,
+  isAuthenticated: false,
+  error: null,
+  loading: true,
+};
 
-const userReducer = (user, action) => {
-  const {
-    CREATE_USER,
-    CREATE_USER_FAIL,
-    USER_RESET,
-    LOGIN_USER,
-    LOGIN_USER_FAIL,
-  } = actionNames;
+const userReducer = (user = initalState, action) => {
+  const { type, payload } = action;
 
-  user = initalState;
-  switch (action.type) {
-    // User Registeration Reducers
+  switch (type) {
     case CREATE_USER:
-      return { ...user, user: action.payload, error: false };
+      return {
+        ...user,
+        isAuthenticated: true,
+        error: false,
+        loading: false,
+        user: payload,
+      };
     case CREATE_USER_FAIL:
-      return { ...user, error: action.payload, user: {} };
-    case USER_RESET:
-      user.user = {};
-      user.error = false;
-      return user;
+      return {
+        ...user,
+        isAuthenticated: false,
+        error: payload,
+        loading: true,
+        user: null,
+      };
 
-    // User Login Reducers
     case LOGIN_USER:
-      return { ...user, user: action.payload, error: false };
+      return { ...user, isAuthenticated: true, error: false, user: payload };
     case LOGIN_USER_FAIL:
-      return { ...user, error: action.payload, user: {} };
+      return { ...user, isAuthenticated: false, error: payload, user: null };
+
+
+    case LOG_OUT: 
+      return initalState;
 
     default:
       return user;

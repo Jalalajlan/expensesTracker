@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import userAction from "./../../actions/user";
 import { useDispatch } from "react-redux";
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -16,8 +16,7 @@ const Navbar = () => {
         <button
           className="flex"
           onClick={() => {
-            dispatch(userAction.resetUser());
-            localStorage.removeItem("user");
+            dispatch(userAction.logout());
             navigate("/login");
           }}
         >

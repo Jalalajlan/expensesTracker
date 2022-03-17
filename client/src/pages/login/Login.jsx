@@ -2,7 +2,7 @@ import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import userAction from "./../../actions/user";
 import Modal from "./../../component/Modal/modal";
 
@@ -15,36 +15,37 @@ const Login = () => {
     password: "",
     password2: "",
   });
-  const [isopen, setIsOpen] = useState(false);
 
+  const [isopen, setIsOpen] = useState(false);
   const user = useSelector((state) => state.user);
-  console.log(user);
 
   useEffect(() => {
     if (user.error === "invalid credentials") {
-      alert("please enter valid email and password");
+      alert("Error: please enter valid email and password");
       resetForm();
     }
-    const storedUser = JSON.parse(localStorage.getItem("user"));
 
-    if (storedUser) {
-      navigate("/dashboard");
+    const userToken = localStorage.getItem("token");
+
+    if (user.isAuthenticated === true || userToken) {
+      setIsOpen(true);
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     }
-  }, [user, navigate]);
+  }, 
+  
+  [user, navigate]);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.password2) {
       alert("password does not match with each other");
+      resetForm();
     } else {
-      if (user.error === "invalid credentials") {
-        alert("please enter valid email and password");
-        resetForm();
-      } else {
-        dispatch(userAction.loginUser(formData));
-        setIsOpen(true);
-      }
+      dispatch(userAction.loginUser(formData));
     }
   };
 
