@@ -1,26 +1,43 @@
 import "./dashboard.scss";
+import Navbar from "./../../component/Navbar/Navbar";
+import SpendingPlan from "./SpendingPlanCard";
 
 import { useEffect } from "react";
-
-import Navbar from "./../../component/Navbar/Navbar";
 import { useSelector, useDispatch } from "react-redux";
-import expenseActions from "./../../actions/expenses";
-import { Navigate } from "react-router-dom";
+import { getExpensesPlans } from "./../../actions/expenses";
 
 const Dashboard = () => {
-  /********************************/
   const dispatch = useDispatch();
-
-  const expenses = useSelector((state) => state.expenses);
-  const user = useSelector((state) => state.user);
+  const userExpensesPlans = useSelector((state) => state.expenses);
 
   useEffect(() => {
-    dispatch(expenseActions.getUserPlans());
+    const userSavedToken = JSON.parse(localStorage.getItem("token"));
+    dispatch(getExpensesPlans(userSavedToken));
   }, []);
 
   return (
     <>
       <Navbar />
+      <div className="expenses-dashboard">
+        <div className="expenses-dashboard__add-spending-plan-form">
+          <h3>Expenses plans</h3>
+          <button>
+            <span>+</span> Create new plan
+          </button>
+        </div>
+        <div className="spending-card-flex">
+          {userExpensesPlans.length ? (
+            userExpensesPlans.map((expensesPlan) => (
+              <SpendingPlan
+                key={expensesPlan._id}
+                expensesPlan={expensesPlan}
+              />
+            ))
+          ) : (
+            <p>no expenses</p>
+          )}
+        </div>
+      </div>
     </>
   );
 };

@@ -2,8 +2,8 @@ import "./register.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import userAction from "./../../actions/user";
 import Modal from "./../../component/Modal/modal";
+import { registerNewUser } from "./../../actions/user";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -37,9 +37,7 @@ const Register = () => {
         navigate("/dashboard");
       }, 2000);
     }
-  }, 
-  
-  [user, navigate]);
+  }, [user, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,7 +46,7 @@ const Register = () => {
     if (name === "" || email === "" || password === "") {
       alert("all fields are required");
     } else {
-      dispatch(userAction.registerUser(formData));
+      dispatch(registerNewUser(formData));
     }
   };
 

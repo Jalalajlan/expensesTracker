@@ -1,10 +1,10 @@
 /*******************************/
 import {
-  CREATE_USER,
-  CREATE_USER_FAIL,
+  REGISTER_USER,
+  REGISTER_USER_FAIL,
   LOGIN_USER,
   LOGIN_USER_FAIL,
-  LOG_OUT,
+  LOG_OUT_USER,
 } from "./../actions/types";
 
 const initalState = {
@@ -18,7 +18,7 @@ const userReducer = (user = initalState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case CREATE_USER:
+    case REGISTER_USER:
       return {
         ...user,
         isAuthenticated: true,
@@ -26,7 +26,7 @@ const userReducer = (user = initalState, action) => {
         loading: false,
         user: payload,
       };
-    case CREATE_USER_FAIL:
+    case REGISTER_USER_FAIL:
       return {
         ...user,
         isAuthenticated: false,
@@ -40,8 +40,7 @@ const userReducer = (user = initalState, action) => {
     case LOGIN_USER_FAIL:
       return { ...user, isAuthenticated: false, error: payload, user: null };
 
-
-    case LOG_OUT: 
+    case LOG_OUT_USER:
       return initalState;
 
     default:

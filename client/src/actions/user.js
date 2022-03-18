@@ -1,28 +1,28 @@
-import userService from "../api/userService";
+import { register, login } from "./../api/userService";
 import {
-  CREATE_USER,
-  CREATE_USER_FAIL,
+  REGISTER_USER,
+  REGISTER_USER_FAIL,
   LOGIN_USER,
   LOGIN_USER_FAIL,
-  LOG_OUT
+  LOG_OUT_USER,
 } from "./types";
 
-const registerUser = (user) => async (dispatch) => {
+export const registerNewUser = (userData) => async (dispatch) => {
   try {
-    const { data } = await userService.createUser(user);
-    localStorage.setItem("token", JSON.stringify(data.token) );
-    dispatch({ type: CREATE_USER, payload: data });
+    const { data } = await register(userData);
+    localStorage.setItem("token", JSON.stringify(data.token));
+    dispatch({ type: REGISTER_USER, payload: data });
   } catch (error) {
     dispatch({
-      type: CREATE_USER_FAIL,
+      type: REGISTER_USER_FAIL,
       payload: error.response.data.message,
     });
   }
 };
 
-const loginUser = (user) => async (dispatch) => {
+export const loginUser = (userData) => async (dispatch) => {
   try {
-    const { data } = await userService.loginUser(user);
+    const { data } = await login(userData);
     localStorage.setItem("token", JSON.stringify(data.token));
     dispatch({ type: LOGIN_USER, payload: data });
   } catch (error) {
@@ -33,16 +33,7 @@ const loginUser = (user) => async (dispatch) => {
   }
 };
 
-
-const logout = () => async (dispatch) => {
-    localStorage.removeItem("token");
-    dispatch({ type: LOG_OUT });
+export const logoutUser = () => async (dispatch) => {
+  localStorage.removeItem("token");
+  dispatch({ type: LOG_OUT_USER });
 };
-
-const userAction = {
-  loginUser,
-  registerUser,
-  logout
-};
-
-export default userAction;

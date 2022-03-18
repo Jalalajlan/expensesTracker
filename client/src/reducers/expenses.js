@@ -1,12 +1,13 @@
-import { GET_PLAN, GET_PLAN_FAIL } from "../actions/types";
+import { GET_SPENDING_PLANS, GET_SPENDING_PLANS_FAIL } from "../actions/types";
 
 const expensesReducer = (expenses = [], action) => {
-  switch (action.type) {
-    case GET_PLAN:
-      return action.payload;
-    case GET_PLAN_FAIL:
-      return { expenses: [], error: action.payload };
+  const { type, payload } = action;
 
+  switch (type) {
+    case GET_SPENDING_PLANS:
+      return payload;
+    case GET_SPENDING_PLANS_FAIL:
+      return { ...expenses, error: payload };
     default:
       return expenses;
   }

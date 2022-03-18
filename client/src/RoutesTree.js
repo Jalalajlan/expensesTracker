@@ -1,23 +1,25 @@
 import React from "react";
 
 import { Routes, Route } from "react-router-dom";
-import App from "./App";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Dashboard from "./pages/dashboard/Dashboard";
+import SpendingsTrack from "./pages/spendingsTrack/SpendingsTrack";
 
 const RouteTree = () => {
   return (
     <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/spendingPlan/:id" element={<SpendingsTrack />} />
       <Route
         path="*"
         element={
           <main style={{ padding: "1rem" }}>
-            <p>There's nothing here!</p>
+            <p>
+              <b>Route does not exist in the app</b>
+            </p>
           </main>
         }
       />

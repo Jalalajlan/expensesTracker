@@ -1,23 +1,14 @@
-import expensesService from "./../api/expensesService";
-import { GET_PLAN, GET_PLAN_FAIL } from "./types";
+import { GET_SPENDING_PLANS, GET_SPENDING_PLANS_FAIL } from "./types";
+import { getSpendingPlans } from "./../api/expensesService";
 
-const userToken = JSON.parse(localStorage.getItem("token"));  
-console.log(userToken);
-
-const getUserPlans = () => async (dispatch) => {
+export const getExpensesPlans = (userSavedToken) => async (dispatch) => {
   try {
-    const { data } = await expensesService.getPlans(userToken);
-    dispatch({ type: GET_PLAN, payload: data });
+    const { data } = await getSpendingPlans(userSavedToken);
+    dispatch({ type: GET_SPENDING_PLANS, payload: data });
   } catch (error) {
     dispatch({
-      type: GET_PLAN_FAIL,
+      type: GET_SPENDING_PLANS_FAIL,
       payload: error.response.data.message,
     });
   }
 };
-
-const expenseActions = {
-  getUserPlans,
-};
-
-export default expenseActions;

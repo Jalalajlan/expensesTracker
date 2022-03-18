@@ -14,6 +14,7 @@ export const createPlan = async (req, res) => {
     const plan = await Expenses.create({
       user: req.user.id,
       planName: req.body.planName,
+      budget: req.body.budget,
     });
 
     if (plan) res.status(200).json(plan);
@@ -35,17 +36,21 @@ export const updatePlan = async (req, res) => {
     if (plan.user.toString() !== req.user.id)
       res.status(400).json("user is not authorized");
 
-    const updateExpenses = await Expenses.findByIdAndUpdate(
+    const updatedExp = await Expenses.findByIdAndUpdate(
       {
         _id: req.params.id,
       },
       {
         $push: { expenses: req.body },
+      },
+      {
+        new: true,
       }
     );
-    if (updateExpenses) res.status(200).json(updateExpenses);
+
+    if (updatedExp) res.status(200).json(updatedExp);
   } catch (error) {
-    console.log(error);
+    res.status(400).json("failed request");
   }
 };
 

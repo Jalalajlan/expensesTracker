@@ -11,6 +11,10 @@ const expensesSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    budget: {
+      type: Number,
+      required: true,
+    },
     expenses: [
       {
         amount: Number,

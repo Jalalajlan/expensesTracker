@@ -2,8 +2,8 @@ import "./navbar.scss";
 
 import LogoutIcon from "../../images/log_out.svg";
 import { useNavigate } from "react-router-dom";
-import userAction from "./../../actions/user";
 import { useDispatch } from "react-redux";
+import { logoutUser } from "./../../actions/user";
 
 const Navbar = ({ user }) => {
   const navigate = useNavigate();
@@ -16,8 +16,8 @@ const Navbar = ({ user }) => {
         <button
           className="flex"
           onClick={() => {
-            dispatch(userAction.logout());
-            navigate("/login");
+            dispatch(logoutUser());
+            navigate("/");
           }}
         >
           Sign out <img src={LogoutIcon} alt="Log out Icon" />

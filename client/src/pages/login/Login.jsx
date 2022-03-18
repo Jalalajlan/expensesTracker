@@ -3,8 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useState, useEffect } from "react";
-import userAction from "./../../actions/user";
+
 import Modal from "./../../component/Modal/modal";
+import { loginUser } from "../../actions/user";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -33,10 +34,7 @@ const Login = () => {
         navigate("/dashboard");
       }, 2000);
     }
-  }, 
-  
-  [user, navigate]);
-
+  }, [user, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,7 +43,7 @@ const Login = () => {
       alert("password does not match with each other");
       resetForm();
     } else {
-      dispatch(userAction.loginUser(formData));
+      dispatch(loginUser(formData));
     }
   };
 
