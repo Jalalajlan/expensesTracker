@@ -2,18 +2,25 @@ import "./dashboard.scss";
 import Navbar from "./../../component/Navbar/Navbar";
 import SpendingPlan from "./SpendingPlanCard";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getExpensesPlans } from "./../../actions/expenses";
+import SpendingPlanForm from "./../../component/SpendingPlanForm/SpendingPlanForm";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const userExpensesPlans = useSelector((state) => state.expenses);
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   useEffect(() => {
     const userSavedToken = JSON.parse(localStorage.getItem("token"));
     dispatch(getExpensesPlans(userSavedToken));
   }, []);
+
+  const showModalForm = () => {
+    setModalIsOpen(!modalIsOpen);
+  };
 
   return (
     <>
@@ -21,7 +28,7 @@ const Dashboard = () => {
       <div className="expenses-dashboard">
         <div className="expenses-dashboard__add-spending-plan-form">
           <h3>Expenses plans</h3>
-          <button>
+          <button onClick={() => showModalForm()}>
             <span>+</span> Create new plan
           </button>
         </div>
@@ -38,6 +45,7 @@ const Dashboard = () => {
           )}
         </div>
       </div>
+      {modalIsOpen && <SpendingPlanForm closeModal={showModalForm} />}
     </>
   );
 };
