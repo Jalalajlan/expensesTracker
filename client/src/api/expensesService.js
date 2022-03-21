@@ -10,3 +10,21 @@ export const getSpendingPlans = (token) => {
   };
   return axios.get(URL, config);
 };
+
+export const createSpendingPlan = (spendingPlan, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return axios.post(URL, spendingPlan, config);
+};
+
+export const deleteSpendPlan = (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return axios.delete(`${URL}/${id}`, config);
+};

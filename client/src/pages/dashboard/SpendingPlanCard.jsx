@@ -1,7 +1,13 @@
 import moment from "moment";
 import { Link } from "react-router-dom";
+import AddIcon from "../../images/add.svg";
+import DeleteIcon from "../../images/delete.svg";
+import { React } from "react";
+import { useDispatch } from "react-redux";
+import { deleteSpendingPlan } from "./../../actions/expenses";
 
 const SpendingPlan = ({ expensesPlan }) => {
+  const dispatch = useDispatch();
   const { _id, planName, createdAt, expenses, budget } = expensesPlan;
 
   const spendingAmountValues = expenses.map((spending) => spending.amount);
@@ -12,12 +18,27 @@ const SpendingPlan = ({ expensesPlan }) => {
 
   return (
     <div className="spending-plan-card">
-      <Link
-        style={{ color: "black", textDecoration: "none" }}
-        to={`/spendingPlan/${_id}`}
-      >
+      <div className="spending-plan-card__delAndAddoptions">
         <h3>○ {planName}</h3>
-      </Link>
+        <div>
+          <Link to={`/spendingPlan/${_id}`}>
+            <img src={AddIcon} alt="close Icon" />
+          </Link>
+          <img
+            data-tip="Delete this spending Card"
+            src={DeleteIcon}
+            alt="Add expenses Icon"
+            onClick={() =>
+              dispatch(
+                deleteSpendingPlan(
+                  _id,
+                  JSON.parse(localStorage.getItem("token"))
+                )
+              )
+            }
+          />
+        </div>
+      </div>
 
       <div className="spending-plan-card__dateCreated">
         <p>Date created</p>

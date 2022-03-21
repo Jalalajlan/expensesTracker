@@ -32,7 +32,7 @@ const Dashboard = () => {
             <span>+</span> Create new plan
           </button>
         </div>
-        <div className="spending-card-flex">
+        <div className="spending-cards-flex">
           {userExpensesPlans.length ? (
             userExpensesPlans.map((expensesPlan) => (
               <SpendingPlan
@@ -41,7 +41,9 @@ const Dashboard = () => {
               />
             ))
           ) : (
-            <p>no expenses</p>
+            <p className="empty-notify-message">
+              No Spending plan has been added ... 🙁
+            </p>
           )}
         </div>
       </div>

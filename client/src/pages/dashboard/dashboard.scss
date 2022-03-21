@@ -58,13 +58,30 @@
 .spending-plan-card {
   display: flex;
   flex-direction: column;
-  gap: 1.23em;
+  gap: 0.5em;
   width: 40%;
-  height: 220px;
   border: 1px solid lightgrey;
   padding: 1.5em;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 13px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+  animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+
+  &__delAndAddoptions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > div {
+      display: inline;
+      img {
+        width: 20px;
+        height: 20px;
+        margin-right: 0.25rem;
+        cursor: pointer;
+      }
+    }
+  }
 
   &__dateCreated {
     > span {
@@ -103,4 +120,29 @@
   font-size: 15px;
   font-weight: 700;
   margin-top: 0.4rem;
+}
+
+.empty-notify-message {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+  .expenses-dashboard {
+    width: 90%;
+  }
+  .spending-plan-card {
+    width: 80%;
+  }
+}
+
+@keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 }

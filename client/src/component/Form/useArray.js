@@ -90,7 +90,7 @@ const useArray = () => {
     },
   ];
 
-  return { catIcons };
+  return { catIcons, categories };
 };
 
 export default useArray;

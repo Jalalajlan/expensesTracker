@@ -1,33 +1,52 @@
 @import "../../scss/variables.scss";
-@import "../../scss/utility.scss";
 
-.Navbar {
-  padding: 1em;
+.app-navbar {
+  display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: $primaryColor;
+  padding: 1em;
+}
 
-  > h1 {
-    font-size: 30px;
-    font-weight: 900;
-  }
+.app-navbar .app-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.85em;
+}
 
-  &__account {
-    align-items: center;
-    gap: 1em;
+.app-logo h3 {
+  font-family: "Kumbah Sans";
+  font-weight: bolder;
+  font-size: 24px;
+}
 
-    > button {
-      cursor: pointer;
-      align-items: center;
-      font-size: 17px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: 600;
-      background: $secondaryColor;
-      color: $whiteColor;
-      gap: 0.4rem;
-      padding: 0.7em;
-      outline: 0;
-      border: 1px solid white;
-    }
-  }
+.app-logo img {
+  width: 60px;
+  height: 60px;
+}
+
+.app-navbar .account-details {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.account-details p {
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: rgba(0, 0, 0, 0.815);
+}
+
+.account-details button {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 1em;
+  color: #ffff;
+  outline: 0;
+  border: 0;
+  background: #4d1727;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bolder;
 }

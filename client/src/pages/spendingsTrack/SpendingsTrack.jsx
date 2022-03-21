@@ -1,7 +1,6 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../../component/Navbar/Navbar";
-import Expenses from "../../component/Expenses/Expenses";
+import SpendingDetails from "../../component/Spendings_Details/SpendingDetails";
 
 const SpendingsTrack = () => {
   const { id } = useParams();
@@ -9,7 +8,7 @@ const SpendingsTrack = () => {
   return (
     <>
       <Navbar />
-      <Expenses />
+      <SpendingDetails />
       <p>spending Plan ID: {id}</p>
     </>
   );
