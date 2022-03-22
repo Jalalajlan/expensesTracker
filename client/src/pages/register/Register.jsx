@@ -1,9 +1,9 @@
-import "./register.scss";
+import "./Register.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Modal from "./../../component/Modal/modal";
-import { registerNewUser } from "./../../actions/user";
+import Modal from "../../component/Modal/Modal";
+import { registerNewUser } from "../../actions/user";
 
 const Register = () => {
   const dispatch = useDispatch();

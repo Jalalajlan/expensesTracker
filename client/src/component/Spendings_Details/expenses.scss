@@ -4,88 +4,75 @@
 ////////////////////////////////////////////
 ////////////////////////////////////////////@
 
-.expenses {
+.spendings-details {
   display: flex;
   align-items: flex-start;
   padding: 1em;
+  gap: 20px;
 
-  &__dashboard {
+  &__overall {
     flex: 2;
     display: flex;
     flex-direction: column;
-    gap: 1.6em;
+    gap: 1em;
 
-    &__summary {
+    &__cards {
       display: flex;
       gap: 1rem;
 
-      .budget-summary {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.8em;
+      .budget-card {
         width: 30%;
-        height: 200px;
-        background: rgba(255, 250, 209, 0.87);
-        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
-        animation: scale-up-center 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+        text-align: center;
+        padding: 1em;
+        border: 1px solid lightgray;
 
-        span {
-          font-size: 24px;
-          font-weight: 900;
-          color: rgba(0, 0, 0, 0.507);
+        > span {
+          border-radius: 10px;
+          padding: 0.3em 3em;
+          font-size: 16px;
+          font-weight: 400;
+          color: #fff;
+          background: lightcoral;
         }
 
-        p {
-          font-size: 30px;
+        > p {
+          font-size: 1.25rem;
           font-weight: 900;
+          margin-top: 2rem;
+          font-family: "Kumbh Sans";
         }
       }
 
-      .expenses-summary {
-        @extend .budget-summary;
+      .total-spendings-card {
+        @extend .budget-card;
       }
 
-      .remain-summary {
-        @extend .budget-summary;
+      .balance-card {
+        @extend .budget-card;
       }
-    }
-    &__bar-chart {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      width: 70%;
-      padding: 0.845em;
-      background: $secondaryColor;
-      color: #fff;
-      font-weight: 900;
-      animation: scale-up-hor-left 0.8s cubic-bezier(0.39, 0.575, 0.565, 1) both;
     }
   }
 }
 
+///
 @keyframes scale-up-center {
   0% {
-    -webkit-transform: scale(0.5);
     transform: scale(0.5);
   }
   100% {
-    -webkit-transform: scale(1);
     transform: scale(1);
   }
 }
 
 @keyframes scale-up-hor-left {
   0% {
-    -webkit-transform: scaleX(0.4);
     transform: scaleX(0.4);
-    -webkit-transform-origin: 0% 0%;
+
     transform-origin: 0% 0%;
   }
   100% {
-    -webkit-transform: scaleX(1);
     transform: scaleX(1);
-    -webkit-transform-origin: 0% 0%;
+
     transform-origin: 0% 0%;
   }
 }

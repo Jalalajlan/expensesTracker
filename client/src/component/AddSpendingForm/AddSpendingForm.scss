@@ -40,7 +40,7 @@
   }
 }
 
-.modal {
+.spending-modal {
   position: fixed;
   left: 0;
   top: 0;
@@ -50,42 +50,39 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  .modal-bg {
-    width: 40%;
-    padding: 1.8em 1.5em;
-    background: $whiteColor;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5em;
-    position: relative;
-    animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-
-    > h4 {
-      font-size: 22px;
-    }
-
-    > img {
-      position: absolute;
-      inset: 1rem 1rem auto auto;
-    }
-  }
 }
 
-.userInput {
-  width: 94%;
-  font-size: 0.8rem;
+.spending-modal .spending-modal-bg {
+  width: 40%;
+  padding: 1.8em 1.5em;
+  background: $whiteColor;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  position: relative;
+  animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.spending-modal-bg form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.spending-modal-bg form input {
   padding: 1em;
+  border: 1px solid lightgray;
   outline: 0;
-  border-color: rgba(211, 211, 211, 0.185);
-  border-radius: 5px;
-  font-family: inherit;
 }
 
-.full-width {
-  width: 94%;
-  background: #1ba1bf;
-  font-weight: bold;
+.spending-modal-bg form button {
+  cursor: pointer;
+  padding: 1em;
+  font-family: "Kumbh Sans";
+  font-weight: 900;
+  background: lightseagreen;
+  color: #ffff;
+  border: 0;
 }
 
 /// Animation

@@ -4,9 +4,9 @@ import AddIcon from "../../images/add.svg";
 import DeleteIcon from "../../images/delete.svg";
 import { React } from "react";
 import { useDispatch } from "react-redux";
-import { deleteSpendingPlan } from "./../../actions/expenses";
+import { deleteSpendingPlan } from "../../actions/expenses";
 
-const SpendingPlan = ({ expensesPlan }) => {
+const SpendingPlanCard = ({ expensesPlan }) => {
   const dispatch = useDispatch();
   const { _id, planName, createdAt, expenses, budget } = expensesPlan;
 
@@ -25,7 +25,6 @@ const SpendingPlan = ({ expensesPlan }) => {
             <img src={AddIcon} alt="close Icon" />
           </Link>
           <img
-            data-tip="Delete this spending Card"
             src={DeleteIcon}
             alt="Add expenses Icon"
             onClick={() =>
@@ -58,4 +57,4 @@ const SpendingPlan = ({ expensesPlan }) => {
   );
 };
 
-export default SpendingPlan;
+export default SpendingPlanCard;

@@ -1,0 +1,22 @@
+b {
+  margin: 1em;
+}
+
+.transactions-history {
+  display: flex;
+  flex-direction: column;
+  width: 59%;
+  margin: 1em 1em;
+
+  .transaction-card {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    border: 1px solid lightgrey;
+    border-right: 5px solid lightcoral;
+
+    > P:nth-child(3) {
+      font-weight: 900;
+    }
+  }
+}

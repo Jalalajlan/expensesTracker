@@ -29,6 +29,11 @@ const expensesReducer = (expenses = [], action) => {
     case DELETE_SPENDING_PLAN_FAIL:
       return { ...expenses, error: payload };
 
+    case ADD_SPENDING_PLAN:
+      return expenses.map((expense) =>
+        expense._id === payload._id ? payload : expense
+      );
+
     default:
       return expenses;
   }

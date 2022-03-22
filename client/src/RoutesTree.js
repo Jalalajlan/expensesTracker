@@ -1,10 +1,10 @@
 import React from "react";
 
 import { Routes, Route } from "react-router-dom";
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
-import Dashboard from "./pages/dashboard/Dashboard";
-import SpendingsTrack from "./pages/spendingsTrack/SpendingsTrack";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import SpendingPlan from "./pages/SpendingPlan/SpendingPlan";
 
 const RouteTree = () => {
   return (
@@ -12,7 +12,7 @@ const RouteTree = () => {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/spendingPlan/:id" element={<SpendingsTrack />} />
+      <Route path="/spendingPlan/:id" element={<SpendingPlan />} />
       <Route
         path="*"
         element={

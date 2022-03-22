@@ -4,7 +4,7 @@ import CloseIcon from "../../images/close.svg";
 import { useDispatch } from "react-redux";
 import { addSpedningPlan } from "../../actions/expenses";
 
-const SpendingPlanForm = ({ closeModal }) => {
+const SpendingPlanForm = ({ closeModalForm }) => {
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
@@ -39,7 +39,7 @@ const SpendingPlanForm = ({ closeModal }) => {
         <img
           src={CloseIcon}
           alt="close modal icon"
-          onClick={() => closeModal()}
+          onClick={() => closeModalForm()}
         />
         <p className="success-notify">
           {error ? "spending has been added successfully ..." : null}{" "}

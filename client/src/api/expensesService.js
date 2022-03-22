@@ -28,3 +28,12 @@ export const deleteSpendPlan = (id, token) => {
   };
   return axios.delete(`${URL}/${id}`, config);
 };
+
+export const addSpendings = (spendingPlanId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return axios.patch(`${URL}/${spendingPlanId}`, config);
+};

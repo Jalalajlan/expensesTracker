@@ -5,11 +5,14 @@ import {
   ADD_SPENDING_PLAN_FAIL,
   DELETE_SPENDING_PLAN,
   DELETE_SPENDING_PLAN_FAIL,
+  ADD_SPENDING_EXPENSE,
+  ADD_SPENDING_EXPENSE_FAIL,
 } from "./types";
 import {
   createSpendingPlan,
   getSpendingPlans,
   deleteSpendPlan,
+  addSpendings,
 } from "./../api/expensesService";
 
 export const getExpensesPlans = (userSavedToken) => async (dispatch) => {
@@ -48,3 +51,16 @@ export const deleteSpendingPlan = (id, userSavedToken) => async (dispatch) => {
     });
   }
 };
+
+export const addSpendingAmount =
+  (spendingPlanId, userSavedToken) => async (dispatch) => {
+    try {
+      const { data } = await addSpendings(spendingPlanId, userSavedToken);
+      dispatch({ type: ADD_SPENDING_EXPENSE, payload: data });
+    } catch (error) {
+      dispatch({
+        type: ADD_SPENDING_EXPENSE_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };

@@ -1,25 +1,25 @@
-import "./dashboard.scss";
+import "./Dashboard.scss";
 import Navbar from "./../../component/Navbar/Navbar";
-import SpendingPlan from "./SpendingPlanCard";
 
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getExpensesPlans } from "./../../actions/expenses";
 import SpendingPlanForm from "./../../component/SpendingPlanForm/SpendingPlanForm";
+import SpendingPlanCard from "./SpendingPlanCard";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const userExpensesPlans = useSelector((state) => state.expenses);
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [openAddPlanModal, setOpenAddPlanModal] = useState(false);
 
   useEffect(() => {
     const userSavedToken = JSON.parse(localStorage.getItem("token"));
     dispatch(getExpensesPlans(userSavedToken));
   }, []);
 
-  const showModalForm = () => {
-    setModalIsOpen(!modalIsOpen);
+  const closeModalForm = () => {
+    setOpenAddPlanModal(!openAddPlanModal);
   };
 
   return (
@@ -28,14 +28,14 @@ const Dashboard = () => {
       <div className="expenses-dashboard">
         <div className="expenses-dashboard__add-spending-plan-form">
           <h3>Expenses plans</h3>
-          <button onClick={() => showModalForm()}>
+          <button onClick={() => closeModalForm()}>
             <span>+</span> Create new plan
           </button>
         </div>
         <div className="spending-cards-flex">
           {userExpensesPlans.length ? (
             userExpensesPlans.map((expensesPlan) => (
-              <SpendingPlan
+              <SpendingPlanCard
                 key={expensesPlan._id}
                 expensesPlan={expensesPlan}
               />
@@ -47,7 +47,7 @@ const Dashboard = () => {
           )}
         </div>
       </div>
-      {modalIsOpen && <SpendingPlanForm closeModal={showModalForm} />}
+      {openAddPlanModal && <SpendingPlanForm closeModal={closeModalForm} />}
     </>
   );
 };
