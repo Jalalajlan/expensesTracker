@@ -69,6 +69,13 @@
   gap: 1em;
 }
 
+.spending-modal-bg form select {
+  padding: 1em;
+  border: 1px solid lightgray;
+  outline: 0;
+  color: rgba(0, 0, 0, 0.815);
+}
+
 .spending-modal-bg form input {
   padding: 1em;
   border: 1px solid lightgray;

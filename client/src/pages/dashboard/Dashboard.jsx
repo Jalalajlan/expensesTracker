@@ -8,15 +8,16 @@ import SpendingPlanForm from "./../../component/SpendingPlanForm/SpendingPlanFor
 import SpendingPlanCard from "./SpendingPlanCard";
 
 const Dashboard = () => {
+  //
   const dispatch = useDispatch();
-  const userExpensesPlans = useSelector((state) => state.expenses);
-
+  const { spendingPlans } = useSelector((state) => state.expenses);
   const [openAddPlanModal, setOpenAddPlanModal] = useState(false);
+  const { email } = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     const userSavedToken = JSON.parse(localStorage.getItem("token"));
     dispatch(getExpensesPlans(userSavedToken));
-  }, []);
+  }, [dispatch]);
 
   const closeModalForm = () => {
     setOpenAddPlanModal(!openAddPlanModal);
@@ -24,7 +25,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar email={email} />
       <div className="expenses-dashboard">
         <div className="expenses-dashboard__add-spending-plan-form">
           <h3>Expenses plans</h3>
@@ -33,11 +34,11 @@ const Dashboard = () => {
           </button>
         </div>
         <div className="spending-cards-flex">
-          {userExpensesPlans.length ? (
-            userExpensesPlans.map((expensesPlan) => (
+          {spendingPlans.length ? (
+            spendingPlans.map((spendingPlan) => (
               <SpendingPlanCard
-                key={expensesPlan._id}
-                expensesPlan={expensesPlan}
+                key={spendingPlan._id}
+                expensesPlan={spendingPlan}
               />
             ))
           ) : (

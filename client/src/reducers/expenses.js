@@ -1,38 +1,76 @@
 import {
-  ADD_SPENDING_PLAN_FAIL,
   ADD_SPENDING_PLAN,
   GET_SPENDING_PLANS,
-  GET_SPENDING_PLANS_FAIL,
   DELETE_SPENDING_PLAN,
-  DELETE_SPENDING_PLAN_FAIL,
+  GET_SPENDING_EXPENSE,
+  SPENDING_PLANS_ERROR,
+  ADD_SPENDING_EXPENSE,
+  DELETE_SPENDING_EXPENSE,
 } from "../actions/types";
 
-const expensesReducer = (expenses = [], action) => {
+const initalState = {
+  spendingPlans: [],
+  spendingPlan: null,
+  error: null,
+  loading: false,
+};
+
+const expensesReducer = (expenses = initalState, action) => {
   const { type, payload } = action;
 
   switch (type) {
     case GET_SPENDING_PLANS:
-      return payload;
-
-    case GET_SPENDING_PLANS_FAIL:
-      return { ...expenses, error: payload };
+      return {
+        ...expenses,
+        spendingPlans: payload,
+        loading: false,
+      };
 
     case ADD_SPENDING_PLAN:
-      return [...expenses, payload];
-
-    case ADD_SPENDING_PLAN_FAIL:
-      return { ...expenses, error: payload };
+      return {
+        ...expenses,
+        spendingPlans: [payload, ...expenses.spendingPlans],
+        loading: false,
+      };
 
     case DELETE_SPENDING_PLAN:
-      return expenses.filter((expense) => expense._id !== payload);
+      return {
+        ...expenses,
+        spendingPlans: expenses.spendingPlans.filter(
+          (expense) => expense._id !== payload
+        ),
+        loading: false,
+      };
 
-    case DELETE_SPENDING_PLAN_FAIL:
-      return { ...expenses, error: payload };
+    case GET_SPENDING_EXPENSE:
+      return {
+        ...expenses,
+        spendingPlan: payload[0],
+        loading: false,
+      };
 
-    case ADD_SPENDING_PLAN:
-      return expenses.map((expense) =>
-        expense._id === payload._id ? payload : expense
-      );
+    case ADD_SPENDING_EXPENSE:
+      return {
+        ...expenses,
+        spendingPlan: payload,
+        loading: false,
+      };
+
+    case DELETE_SPENDING_EXPENSE:
+      return {
+        ...expenses,
+        spendingPlan: expenses.spendingPlan.expenses.filter(
+          (expense) => expense._id !== payload
+        ),
+        loading: false,
+      };
+
+    case SPENDING_PLANS_ERROR:
+      return {
+        ...expenses,
+        error: payload,
+        loading: true,
+      };
 
     default:
       return expenses;

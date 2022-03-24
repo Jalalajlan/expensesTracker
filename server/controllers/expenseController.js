@@ -1,8 +1,20 @@
 import Expenses from "./../models/expense.js";
 
-// @desc   Create user plan
-// @route  POST http://localhost:5000/expenses/
-// @access protected
+// @desc   Get user plans
+// @route  GET http://localhost:5000/expenses/:id
+// @access protectedd
+
+export const getSpendingPlan = async (req, res) => {
+  try {
+    const spendingPlan = await Expenses.find({
+      _id: req.params.id,
+    });
+
+    if (spendingPlan) res.status(200).json(spendingPlan);
+  } catch (error) {
+    res.status(400).json({ message: "error while loading plan" });
+  }
+};
 
 export const createPlan = async (req, res) => {
   try {
@@ -55,7 +67,7 @@ export const updatePlan = async (req, res) => {
 };
 
 // @desc   Delete user plan expenses
-// @route  PATCH http://localhost:5000/expenses/:id/expenses/:id
+// @route  DELETE http://localhost:5000/expenses/:id/expenses/:id
 // @access protected
 
 export const deleteExpense = async (req, res) => {
@@ -78,7 +90,7 @@ export const deleteExpense = async (req, res) => {
     );
     if (updateExpenses) res.status(200).json(updateExpenses);
   } catch (error) {
-    console.log(error);
+    res.status(400).json({ message: "problem deleting expense" });
   }
 };
 
@@ -118,6 +130,6 @@ export const getPlans = async (req, res) => {
 
     if (plans) res.status(200).json(plans);
   } catch (error) {
-    console.log(error);
+    res.status(400).json({ message: "no spending plan found" });
   }
 };

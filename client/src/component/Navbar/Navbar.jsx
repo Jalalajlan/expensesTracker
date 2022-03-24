@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "./../../actions/user";
 
-const Navbar = () => {
+const Navbar = ({ email }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -17,7 +17,7 @@ const Navbar = () => {
         <h3>Expenses.io</h3>
       </div>
       <div className="account-details">
-        <p>Hi, Jalal</p>
+        <p>Hi, {email}</p>
         <button
           onClick={() => {
             dispatch(logoutUser());

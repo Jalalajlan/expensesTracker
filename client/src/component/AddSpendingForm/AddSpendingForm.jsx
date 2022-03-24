@@ -3,22 +3,32 @@ import "./AddSpendingForm.scss";
 import Icon from "../../images/continue.svg";
 import CloseIcon from "../../images/close.svg";
 import { useDispatch } from "react-redux";
+import { addSpendingAmount } from "../../actions/expenses";
 
-const AddSpendingForm = () => {
+const AddSpendingForm = ({ spendingPlanId }) => {
   const dispatch = useDispatch();
 
   const [formOpen, setFormOpen] = useState(false);
   const [formData, setFormData] = useState({
-    date: "",
-    spendingAmount: "",
-    spendingNote: "",
+    category: "Food & Drink",
+    amount: "",
+    note: "",
   });
 
-  const { date, spendingAmount, spendingNote } = formData;
+  const { category, amount, note } = formData;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Submitted");
+
+    if (amount === "" && note === "") alert("Please enter valid data");
+    else
+      dispatch(
+        addSpendingAmount(
+          spendingPlanId,
+          formData,
+          JSON.parse(localStorage.getItem("token"))
+        )
+      );
   };
 
   const handleChange = (e) => {
@@ -36,7 +46,6 @@ const AddSpendingForm = () => {
       >
         Add Transaction <img src={Icon} alt="continue Icon" />
       </button>
-
       {formOpen && (
         <div className="spending-modal">
           <div className="spending-modal-bg">
@@ -47,26 +56,32 @@ const AddSpendingForm = () => {
               alt="close modal icon"
               onClick={() => setFormOpen(!formOpen)}
             />
-            <p>category :</p>
-            <form onSubmit={handleSubmit}>
-              <input
-                type="date"
-                name="date"
-                value={date}
-                onChange={handleChange}
-                placeholder="Date"
-              />
+            <form onSubmit={handleSubmit} autoComplete="false">
+              <select name="category" value={category} onChange={handleChange}>
+                <option value="Food & Drink">Food & Drink</option>
+                <option value="Travel">Travel</option>
+                <option value="Transportation">Transportation</option>
+                <option value="bills">bills</option>
+              </select>
               <input
                 type="text"
-                name="spendingAmount"
-                value={spendingAmount}
-                onChange={handleChange}
+                name="amount"
+                value={amount}
+                pattern="[0-9]*"
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    amount: e.currentTarget.validity.valid
+                      ? e.target.value
+                      : amount,
+                  })
+                }
                 placeholder="Amount"
               />
               <input
                 type="text"
-                name="spendingNote"
-                value={spendingNote}
+                name="note"
+                value={note}
                 onChange={handleChange}
                 placeholder="Note"
               />

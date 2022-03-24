@@ -2,7 +2,7 @@ import React from "react";
 import "./expenses.scss";
 import AddSpendingForm from "../AddSpendingForm/AddSpendingForm";
 
-const SpendingDetails = ({ budget, totalSpendings, balance }) => {
+const SpendingDetails = ({ id, budget, totalSpendings, balance }) => {
   return (
     <div className="spendings-details">
       <div className="spendings-details__overall">
@@ -21,7 +21,7 @@ const SpendingDetails = ({ budget, totalSpendings, balance }) => {
           </div>
         </div>
       </div>
-      <AddSpendingForm />
+      <AddSpendingForm spendingPlanId={id} />
     </div>
   );
 };

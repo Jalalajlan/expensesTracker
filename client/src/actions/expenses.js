@@ -1,18 +1,20 @@
 import {
   GET_SPENDING_PLANS,
-  GET_SPENDING_PLANS_FAIL,
   ADD_SPENDING_PLAN,
-  ADD_SPENDING_PLAN_FAIL,
   DELETE_SPENDING_PLAN,
-  DELETE_SPENDING_PLAN_FAIL,
   ADD_SPENDING_EXPENSE,
-  ADD_SPENDING_EXPENSE_FAIL,
+  GET_SPENDING_EXPENSE,
+  SPENDING_PLANS_ERROR,
+  DELETE_SPENDING_EXPENSE,
 } from "./types";
+
 import {
   createSpendingPlan,
   getSpendingPlans,
   deleteSpendPlan,
   addSpendings,
+  getSpendingsOfPlan,
+  deleteExpense,
 } from "./../api/expensesService";
 
 export const getExpensesPlans = (userSavedToken) => async (dispatch) => {
@@ -21,7 +23,7 @@ export const getExpensesPlans = (userSavedToken) => async (dispatch) => {
     dispatch({ type: GET_SPENDING_PLANS, payload: data });
   } catch (error) {
     dispatch({
-      type: GET_SPENDING_PLANS_FAIL,
+      type: SPENDING_PLANS_ERROR,
       payload: error.response.data.message,
     });
   }
@@ -34,7 +36,7 @@ export const addSpedningPlan =
       dispatch({ type: ADD_SPENDING_PLAN, payload: data });
     } catch (error) {
       dispatch({
-        type: ADD_SPENDING_PLAN_FAIL,
+        type: SPENDING_PLANS_ERROR,
         payload: error.response.data.message,
       });
     }
@@ -46,20 +48,50 @@ export const deleteSpendingPlan = (id, userSavedToken) => async (dispatch) => {
     dispatch({ type: DELETE_SPENDING_PLAN, payload: id });
   } catch (error) {
     dispatch({
-      type: DELETE_SPENDING_PLAN_FAIL,
+      type: SPENDING_PLANS_ERROR,
       payload: error.response.data.message,
     });
   }
 };
 
 export const addSpendingAmount =
-  (spendingPlanId, userSavedToken) => async (dispatch) => {
+  (spendingPlanId, formData, userSavedToken) => async (dispatch) => {
     try {
-      const { data } = await addSpendings(spendingPlanId, userSavedToken);
+      const { data } = await addSpendings(
+        spendingPlanId,
+        formData,
+        userSavedToken
+      );
       dispatch({ type: ADD_SPENDING_EXPENSE, payload: data });
     } catch (error) {
       dispatch({
-        type: ADD_SPENDING_EXPENSE_FAIL,
+        type: SPENDING_PLANS_ERROR,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+export const getSpendingPlan =
+  (spendingPlanId, userSavedToken) => async (dispatch) => {
+    try {
+      const { data } = await getSpendingsOfPlan(spendingPlanId, userSavedToken);
+      dispatch({ type: GET_SPENDING_EXPENSE, payload: data });
+    } catch (error) {
+      dispatch({
+        type: SPENDING_PLANS_ERROR,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+export const deleteSpendingExpense =
+  (spendingPlanId, expenseID, userSavedToken) => async (dispatch) => {
+    try {
+      await deleteExpense(spendingPlanId, expenseID, userSavedToken);
+      dispatch({ type: DELETE_SPENDING_EXPENSE, payload: expenseID });
+    } catch (error) {
+      dispatch({
+        type: SPENDING_PLANS_ERROR,
         payload: error.response.data.message,
       });
     }

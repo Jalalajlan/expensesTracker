@@ -30,3 +30,13 @@ export const DELETE_SPENDING_PLAN_FAIL = "DELETE_SPENDING_PLAN";
 // Add spending expense
 export const ADD_SPENDING_EXPENSE = "ADD_SPENDING_EXPENSE";
 export const ADD_SPENDING_EXPENSE_FAIL = "ADD_SPENDING_EXPENSE";
+
+// Add spending expense
+export const GET_SPENDING_EXPENSE = "GET_SPENDING_EXPENSE";
+export const GET_SPENDING_EXPENSE_FAIL = "GET_SPENDING_EXPENSE";
+
+// delete spending amount
+export const DELETE_SPENDING_EXPENSE = "DELETE_SPENDING_EXPENSE";
+
+// Error Handler
+export const SPENDING_PLANS_ERROR = "SPENDING_PLANS_ERROR";

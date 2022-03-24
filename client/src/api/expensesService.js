@@ -29,11 +29,29 @@ export const deleteSpendPlan = (id, token) => {
   return axios.delete(`${URL}/${id}`, config);
 };
 
-export const addSpendings = (spendingPlanId, token) => {
+export const addSpendings = (spendingPlanId, formData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.patch(`${URL}/${spendingPlanId}`, config);
+  return axios.patch(`${URL}${spendingPlanId}`, formData, config);
+};
+
+export const getSpendingsOfPlan = (spendingPlanId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return axios.get(`${URL}${spendingPlanId}`, config);
+};
+
+export const deleteExpense = (spendingPlanId, expenseId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return axios.delete(`${URL}${spendingPlanId}/expenses/${expenseId}`, config);
 };
