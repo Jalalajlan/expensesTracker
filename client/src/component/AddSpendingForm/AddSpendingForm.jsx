@@ -21,7 +21,7 @@ const AddSpendingForm = ({ spendingPlanId }) => {
     e.preventDefault();
 
     if (amount === "" && note === "") alert("Please enter valid data");
-    else
+    else {
       dispatch(
         addSpendingAmount(
           spendingPlanId,
@@ -29,6 +29,8 @@ const AddSpendingForm = ({ spendingPlanId }) => {
           JSON.parse(localStorage.getItem("token"))
         )
       );
+      resetForm();
+    }
   };
 
   const handleChange = (e) => {
@@ -36,6 +38,13 @@ const AddSpendingForm = ({ spendingPlanId }) => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const resetForm = () => {
+    setFormData({
+      amount: "",
+      note: "",
+    });
   };
 
   return (

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getExpensesPlans } from "./../../actions/expenses";
 import SpendingPlanForm from "./../../component/SpendingPlanForm/SpendingPlanForm";
-import SpendingPlanCard from "./SpendingPlanCard";
+import SpendingPlanCard from "./../../component/SpendingPlanCard/SpendingPlanCard";
 
 const Dashboard = () => {
   //
