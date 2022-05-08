@@ -93,8 +93,8 @@ const Login = () => {
             onChange={onChange}
           />
           <input type="submit" value="Login" />
-          <Link to="/register">
-            Don't have an account, <b>Register now</b>
+          <Link to="/register" className="register-nav-link">
+            Don't have an account <span>Register now</span>
           </Link>
         </form>
       </div>

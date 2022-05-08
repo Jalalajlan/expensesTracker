@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://localhost:5000/expenses/";
+const URL = "https://jalal-expenses-app.herokuapp.com/expenses/";
 
 export const getSpendingPlans = (token) => {
   const config = {

@@ -43,6 +43,16 @@
         background: $secondaryColor;
       }
 
+      .register-nav-link {
+        color: lightgrey;
+        text-decoration: none;
+        span {
+          text-decoration: underline;
+          font-weight: bold;
+          color: $secondaryColor;
+        }
+      }
+
       input[type="submit"]:hover {
         background: lighten($secondaryColor, 10%);
       }

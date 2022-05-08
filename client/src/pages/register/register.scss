@@ -26,6 +26,16 @@
       gap: 2em;
       padding: 1em;
 
+      .login-nav-link {
+        color: lightgrey;
+        text-decoration: none;
+        span {
+          text-decoration: underline;
+          font-weight: bold;
+          color: $secondaryColor;
+        }
+      }
+
       input[type="text"],
       input[type="email"],
       input[type="password"],

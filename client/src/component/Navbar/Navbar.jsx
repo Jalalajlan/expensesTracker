@@ -2,7 +2,7 @@ import "./navbar.scss";
 
 import LogoutIcon from "../../images/log_out.svg";
 import logo from "../../images/totalExpenses.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "./../../actions/user";
 
@@ -12,9 +12,12 @@ const Navbar = ({ email }) => {
 
   return (
     <div className="app-navbar">
-      <div className="app-logo">
+      <div className="app-logo" onClick={() => navigate("/dashboard")}>
         <img src={logo} alt="Logo Icon" />
         <h3>Expenses.io</h3>
+        <Link to="/dashboard" style={{ fontWeight: "bold", color: "black" }}>
+          Dashboard
+        </Link>
       </div>
       <div className="account-details">
         <p>Hi, {email}</p>

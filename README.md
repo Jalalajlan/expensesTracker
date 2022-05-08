@@ -15,14 +15,12 @@ in this project, I utilized MERN Technologies as well as Redux for state managem
 
 ## Run the project
 
-navigate to the client directory, run this command
+navigate to the client directory, run this command:
 
-<b>npm install</b>
+<b>npm install && npm start</b>
 
-<b>npm start</b>
+navigate to the server directory, run this command:
 
-navigate to the server directory, run this command
+<b>npm install && npm start</b>
 
-<b>npm install</b>
-
-<b>npm start</b>
+## Project Demo
