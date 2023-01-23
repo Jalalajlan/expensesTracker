@@ -1,6 +1,6 @@
 import CloseIcon from "../../images/close.svg";
 import SuccessIcon from "../../images/checked.png";
-import "./Modal.scss";
+import "./modal.scss";
 
 const Modal = ({ message, closeModal }) => {
   return (

@@ -1,4 +1,4 @@
-import "./navbar.scss";
+import "./Navbar.scss";
 
 import LogoutIcon from "../../images/log_out.svg";
 import logo from "../../images/totalExpenses.svg";

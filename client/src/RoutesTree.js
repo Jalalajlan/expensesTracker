@@ -1,9 +1,9 @@
 import React from "react";
 
 import { Routes, Route } from "react-router-dom";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
-import Dashboard from "./pages/Dashboard/Dashboard";
+import Login from "./pages/login/Login.jsx";
+import Register from "./pages/register/Register";
+import Dashboard from "./pages/dashboard/Dashboard";
 import SpendingPlan from "./pages/SpendingPlan/SpendingPlan";
 
 const RouteTree = () => {

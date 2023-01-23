@@ -1,4 +1,4 @@
-import "./Dashboard.scss";
+import "./dashboard.scss";
 import Navbar from "./../../component/Navbar/Navbar";
 
 import { useEffect, useState } from "react";

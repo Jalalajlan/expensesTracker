@@ -1,10 +1,10 @@
-import "./Login.scss";
+import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useState, useEffect } from "react";
 
-import Modal from "../../component/Modal/Modal";
+import Modal from "../../component/Modal/modal";
 import { loginUser } from "../../actions/user";
 
 const Login = () => {
